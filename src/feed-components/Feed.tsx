@@ -1,11 +1,8 @@
 import ITweet from "../entities/Tweet";
-import useDateFormat from "../hooks/DateFormatHook";
 import useLocalStorage from "../hooks/LocalStorageHook";
-import Author from "../styled-components/Author";
-import TweetDate from "../styled-components/Date";
-import TweetDescription from "../styled-components/Description";
 import NewTweet from "./NewTweet";
-import Tweet from "./Tweet";
+
+import MemoizedNewTweet from "./TweetList";
 
 
 interface FeedProps {
@@ -14,7 +11,7 @@ interface FeedProps {
 
 const Feed: React.FC<FeedProps> = ({ currentUser }) => {
     const [tweets, setTweets] = useLocalStorage('tweets', []);
-
+    console.log('feed is rendered');
     function addTweet(text: string) {
       const newTweet: ITweet = {
         author: currentUser,
@@ -29,9 +26,7 @@ const Feed: React.FC<FeedProps> = ({ currentUser }) => {
     return (
         <>
         <NewTweet currentUsername={currentUser} characterLimit={280} addTweetHandler={addTweet}></NewTweet>
-        {tweets.map((tweet: ITweet) => (
-          <Tweet key={tweet.id} tweet={tweet}></Tweet>
-        ))}
+        <MemoizedNewTweet tweets={tweets}></MemoizedNewTweet>
         </>
     );
 }

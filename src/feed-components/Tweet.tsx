@@ -11,6 +11,7 @@ interface TweetProps {
     tweet: ITweet;
 }
 const Tweet: React.FC<TweetProps> = ({tweet}) => {
+    console.log('a tweet is rendered');
     const dateFormatter = useDateFormat('HH:mm a · MMM dd, yyyy');
 
     return (

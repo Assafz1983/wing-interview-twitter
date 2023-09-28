@@ -5,6 +5,7 @@ import TweetButton from "../styled-components/buttons";
 import TextArea from "../styled-components/TextArea";
 import FlexboxEnd from "../styled-components/Flexbox";
 import Separator from "../styled-components/Separator";
+import React from "react";
 
 
 interface NewTweetProps {
@@ -14,8 +15,7 @@ interface NewTweetProps {
 }
 
 const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, addTweetHandler }) => {
-    console.log(currentUsername);
-    console.log(characterLimit);
+    console.log('new tweet is rendered');
     const textAreaFocus = useRef<HTMLTextAreaElement>(null);
     const [text, setText] = useState('');
     const [isValid, setIsValid] = useState(false);
@@ -68,4 +68,6 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
     );
 }
 
-export default NewTweet;
+const MemoizedNewTweet = React.memo(NewTweet);
+
+export default MemoizedNewTweet;
