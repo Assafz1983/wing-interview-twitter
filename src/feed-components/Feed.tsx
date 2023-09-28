@@ -28,7 +28,7 @@ const Feed: React.FC<FeedProps> = ({ currentUser }) => {
     
     return (
         <>
-        <NewTweet currentUsername="{currentUser}" characterLimit={280} addTweetHandler={addTweet}></NewTweet>
+        <NewTweet currentUsername={currentUser} characterLimit={280} addTweetHandler={addTweet}></NewTweet>
         {tweets.map((tweet: ITweet) => (
           <Tweet key={tweet.id} tweet={tweet}></Tweet>
         ))}
