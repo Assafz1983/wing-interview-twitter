@@ -35,6 +35,7 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
     function addTweet(event: any) {
         addTweetHandler(text);
         setText('');
+        setIsValid(validateText(''));
         setTimeout(() => {
             if (textAreaFocus.current) {
                 textAreaFocus.current.focus();
