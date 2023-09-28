@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import Author from "../styled-components/Author";
-import RoundedContainer from "../styled-components/RoundedContainer";
-import Underline from "../styled-components/Underline";
+import NewTweetContainer from "../styled-components/RoundedContainer";
 import TweetButton from "../styled-components/buttons";
 import TextArea from "../styled-components/TextArea";
-import Flexbox from "../styled-components/Flexbox";
 import FlexboxEnd from "../styled-components/Flexbox";
 import Separator from "../styled-components/Separator";
 
@@ -45,7 +43,7 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
     }
 
     return (
-        <RoundedContainer>
+        <NewTweetContainer>
             <Author $underline>{currentUsername}</Author>
             
             <TextArea
@@ -65,7 +63,7 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
             </FlexboxEnd>
             
                 
-        </RoundedContainer>
+        </NewTweetContainer>
     );
 }
 
