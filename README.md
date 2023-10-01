@@ -26,7 +26,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### App Structure
-Inside src we have the following structure:
+Inside src we have the following structure:<br>
 -entities<br>
 -feed<br>
 -hooks<br>
