@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import ITweet from "../../entities/Tweet";
-import MemoizedTweet from "./Tweet";
+import MemoizedTweet from "./Tweet/Tweet";
 
 
 interface TweetListProps {
