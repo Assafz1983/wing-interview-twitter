@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 
 
-const NewTweetContainer = styled.div`
+const RoundedContainer = styled.div`
     border-radius: 6px;
-    border: 1px solid gray;
+    border: 1px solid rgb(207, 217, 222);
     width: 500px;
     padding: 20px 10px 5px 10px;
     position: sticky;
@@ -11,4 +11,4 @@ const NewTweetContainer = styled.div`
     background-color: white;
 `;
 
-export default NewTweetContainer;
+export default RoundedContainer;

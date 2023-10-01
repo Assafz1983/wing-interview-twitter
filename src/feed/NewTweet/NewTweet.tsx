@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import Author from "../styled-components/Author";
-import NewTweetContainer from "../styled-components/RoundedContainer";
-import TweetButton from "../styled-components/buttons";
-import TextArea from "../styled-components/TextArea";
-import FlexboxEnd from "../styled-components/Flexbox";
-import Separator from "../styled-components/Separator";
+import RoundedContainer from "../../styled-components/RoundedContainer";
+import TextArea from "../../styled-components/TextArea";
+import FlexboxEnd from "../../styled-components/Flexbox";
+import Separator from "../../styled-components/Separator";
 import React from "react";
+import MemoizedtweetButton from "./TweetButton/TweetButton";
+import MemoizedCharCount from "./CharCounter/CharCounter";
+import MemoizedTweetAuthor from "./TweetAuthor/TweetAuthor";
 
 
 interface NewTweetProps {
@@ -15,7 +16,6 @@ interface NewTweetProps {
 }
 
 const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, addTweetHandler }) => {
-    console.log('new tweet is rendered');
     const textAreaFocus = useRef<HTMLTextAreaElement>(null);
     const [text, setText] = useState('');
     const [isValid, setIsValid] = useState(false);
@@ -24,16 +24,18 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
         return text.length > 0 && text.length <= characterLimit;
     }
 
-    function handleTextareaChange(event: any) {
+    const handleTextareaChange = React.useCallback((event: any) => {
         const newText = event.target.value;
         setText(newText);
         setIsValid(validateText(newText));
+    }, []);
 
-        
-    }
 
-    function addTweet(event: any) {
-        addTweetHandler(text);
+    const addTweet = React.useCallback(() => {
+        const tweetText = textAreaFocus.current?.value; // not using the count from the store so it can not be a dependency...
+        if (tweetText) {
+            addTweetHandler(tweetText);
+        }
         setText('');
         setIsValid(validateText(''));
         setTimeout(() => {
@@ -41,11 +43,11 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
                 textAreaFocus.current.focus();
             }
         }, 300);
-    }
+    }, [])
 
     return (
-        <NewTweetContainer>
-            <Author $underline>{currentUsername}</Author>
+        <RoundedContainer>
+            <MemoizedTweetAuthor authorName={currentUsername}></MemoizedTweetAuthor>
             
             <TextArea
                 ref={textAreaFocus}
@@ -58,13 +60,13 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
                 value={text}
                 onChange={handleTextareaChange}/>
             <FlexboxEnd>
-                <div>{text.length}</div>
+                <MemoizedCharCount count={text.length}></MemoizedCharCount>
                 <Separator></Separator>
-                <TweetButton onClick={addTweet} $disabled={!isValid}>Tweet</TweetButton>
+                <MemoizedtweetButton isValid={isValid} buttonText="Tweet" onclick={addTweet}></MemoizedtweetButton>
             </FlexboxEnd>
             
                 
-        </NewTweetContainer>
+        </RoundedContainer>
     );
 }
 

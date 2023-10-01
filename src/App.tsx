@@ -1,8 +1,5 @@
 import './App.css';
-import TweetButton from './styled-components/buttons';
-import Author from './styled-components/Author';
-import NewTweet from './feed-components/NewTweet';
-import Feed from './feed-components/Feed';
+import Feed from './feed/Feed';
 
 
 

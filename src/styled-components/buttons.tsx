@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TweetButton = styled.button<{$disabled: boolean}>`
+const Button = styled.button<{$disabled: boolean}>`
 border-radius: 9999px;
 border: none;
 background-color: rgb(29, 155, 240);
@@ -15,4 +15,4 @@ opacity: ${props => props.$disabled ? "0.6" : "1"};
 pointer-events: ${props => props.$disabled ? "none" : "all"};
 `;
 
-export default  TweetButton;
+export default  Button;

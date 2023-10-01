@@ -1,8 +1,8 @@
 import ITweet from "../entities/Tweet";
 import useLocalStorage from "../hooks/LocalStorageHook";
-import NewTweet from "./NewTweet";
+import NewTweet from "./NewTweet/NewTweet";
 
-import MemoizedNewTweet from "./TweetList";
+import MemoizedNewTweet from "./TweetList/TweetList";
 
 
 interface FeedProps {
