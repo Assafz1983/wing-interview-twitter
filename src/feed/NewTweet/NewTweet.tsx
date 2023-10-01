@@ -16,7 +16,7 @@ interface NewTweetProps {
 }
 
 const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, addTweetHandler }) => {
-    const textAreaFocus = useRef<HTMLTextAreaElement>(null);
+    const textArea = useRef<HTMLTextAreaElement>(null);
     const [text, setText] = useState('');
     const [isValid, setIsValid] = useState(false);
 
@@ -30,19 +30,20 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
         setIsValid(validateText(newText));
     }, []);
 
-
+    // in order to benefit from the addTweet - we are wrapping the handler with a useCallback so it will not cause a re-rendering of the button
+    // in order for that - we need to read the text directly from the textInput rather than from the store to save the dependency
     const addTweet = React.useCallback(() => {
-        const tweetText = textAreaFocus.current?.value; // not using the count from the store so it can not be a dependency...
+        const tweetText = textArea.current?.value; 
         if (tweetText) {
             addTweetHandler(tweetText);
         }
         setText('');
         setIsValid(validateText(''));
         setTimeout(() => {
-            if (textAreaFocus.current) {
-                textAreaFocus.current.focus();
+            if (textArea.current) {
+                textArea.current.focus();
             }
-        }, 300);
+        }, 100);
     }, [])
 
     return (
@@ -50,7 +51,7 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
             <MemoizedTweetAuthor authorName={currentUsername}></MemoizedTweetAuthor>
             
             <TextArea
-                ref={textAreaFocus}
+                ref={textArea}
                 autoFocus
                 maxRows={4}
                 minRows={1}

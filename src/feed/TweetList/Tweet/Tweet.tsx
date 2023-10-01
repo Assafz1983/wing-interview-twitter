@@ -7,6 +7,9 @@ import TweetDescription from "../../../styled-components/Description";
 import Underline from "../../../styled-components/Underline";
 import TweetContainer from "../../../styled-components/TweetContainer";
 
+
+// memoizing the rendering of a single tweet component so it will not render the whole item every time the whole list is chnaged
+
 interface TweetProps {
     tweet: ITweet;
 }
