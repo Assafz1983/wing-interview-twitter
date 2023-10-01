@@ -27,9 +27,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### App Structure
 Inside src we have the following structure:
--entities\n
--feed\n
--hooks\n
+-entities<br>
+-feed<br>
+-hooks<br>
 -styled-components
 
 #### entities
