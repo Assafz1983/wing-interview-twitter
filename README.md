@@ -30,7 +30,7 @@ Inside src we have the following structure:
 -entities<br>
 -feed<br>
 -hooks<br>
--styled-components
+-styled-components<br>
 
 #### entities
 Entities hold the shared interfaces in the app
