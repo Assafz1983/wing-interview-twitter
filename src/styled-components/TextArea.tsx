@@ -10,6 +10,8 @@ const TextArea = styled(TextareaAutosize)<{$valid: boolean, $empty: boolean}>`
     display: block;
     width: 100%;
     margin-bottom: 20px;
+    padding-bottom: 10px;
+    margin-top: 10px;
 `;
 
 export default TextArea;

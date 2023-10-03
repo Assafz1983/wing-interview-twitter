@@ -5,7 +5,7 @@ import FlexboxEnd from "../../styled-components/Flexbox";
 import Separator from "../../styled-components/Separator";
 import React from "react";
 import MemoizedtweetButton from "./TweetButton/TweetButton";
-import MemoizedCharCount from "./CharCounter/CharCounter";
+import CharCount from "./CharCounter/CharCounter";
 import MemoizedTweetAuthor from "./TweetAuthor/TweetAuthor";
 
 
@@ -18,16 +18,15 @@ interface NewTweetProps {
 const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, addTweetHandler }) => {
     const textArea = useRef<HTMLTextAreaElement>(null);
     const [text, setText] = useState('');
-    const [isValid, setIsValid] = useState(false);
 
-    function validateText(text: string) {
+
+    const validateText = React.useCallback((text: string) => {
         return text.length > 0 && text.length <= characterLimit;
-    }
+    }, []);
 
     const handleTextareaChange = React.useCallback((event: any) => {
         const newText = event.target.value;
         setText(newText);
-        setIsValid(validateText(newText));
     }, []);
 
     // in order to benefit from the addTweet - we are wrapping the handler with a useCallback so it will not cause a re-rendering of the button
@@ -38,7 +37,6 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
             addTweetHandler(tweetText);
         }
         setText('');
-        setIsValid(validateText(''));
         setTimeout(() => {
             if (textArea.current) {
                 textArea.current.focus();
@@ -56,14 +54,14 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
                 maxRows={4}
                 minRows={1}
                 placeholder="What would you like to tweet today?"
-                $valid={isValid}
+                $valid={validateText(text)}
                 $empty={text.length === 0}
                 value={text}
                 onChange={handleTextareaChange}/>
             <FlexboxEnd>
-                <MemoizedCharCount count={text.length}></MemoizedCharCount>
+                <CharCount count={text.length}></CharCount>
                 <Separator></Separator>
-                <MemoizedtweetButton isValid={isValid} buttonText="Tweet" onclick={addTweet}></MemoizedtweetButton>
+                <MemoizedtweetButton isValid={validateText(text)} buttonText="Tweet" onclick={addTweet}></MemoizedtweetButton>
             </FlexboxEnd>
             
                 
@@ -71,6 +69,5 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
     );
 }
 
-const MemoizedNewTweet = React.memo(NewTweet);
 
-export default MemoizedNewTweet;
+export default NewTweet;

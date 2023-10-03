@@ -1,8 +1,9 @@
 import ITweet from "../entities/Tweet";
-import useLocalStorage from "../hooks/LocalStorageHook";
+import useLocalStorageArr from "../hooks/LocalStorageHook";
+import Underline from "../styled-components/Underline";
 import NewTweet from "./NewTweet/NewTweet";
+import TweetList from "./TweetList/TweetList";
 
-import MemoizedNewTweet from "./TweetList/TweetList";
 
 
 interface FeedProps {
@@ -10,8 +11,8 @@ interface FeedProps {
 }
 
 const Feed: React.FC<FeedProps> = ({ currentUser }) => {
-    const [tweets, setTweets] = useLocalStorage('tweets', []);
-    console.log('feed is rendered');
+    const [tweets, addNewTweet] = useLocalStorageArr('tweets', []);
+    
     function addTweet(text: string) {
       const newTweet: ITweet = {
         author: currentUser,
@@ -19,14 +20,14 @@ const Feed: React.FC<FeedProps> = ({ currentUser }) => {
         createdAt: new Date().getTime(),
         id: new Date().getTime()
       }
-      const updatedTweets = [ newTweet, ...tweets];
-      setTweets(updatedTweets);
+      addNewTweet(newTweet);
     }
     
     return (
         <>
         <NewTweet currentUsername={currentUser} characterLimit={280} addTweetHandler={addTweet}></NewTweet>
-        <MemoizedNewTweet tweets={tweets}></MemoizedNewTweet>
+        <Underline></Underline>
+        <TweetList tweets={tweets}></TweetList>
         </>
     );
 }

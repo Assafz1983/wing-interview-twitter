@@ -11,6 +11,4 @@ const CharCounter: React.FC<CharCounterProps> = ({ count }) => {
     );
 };
 
-const MemoizedCharCount = React.memo(CharCounter);
-
-export default MemoizedCharCount;
+export default CharCounter;
