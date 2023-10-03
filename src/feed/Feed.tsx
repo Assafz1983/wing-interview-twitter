@@ -27,7 +27,7 @@ const Feed: React.FC<FeedProps> = ({ currentUser }) => {
         <>
         <NewTweet currentUsername={currentUser} characterLimit={280} addTweetHandler={addTweet}></NewTweet>
         <Underline></Underline>
-        <TweetList tweets={tweets}></TweetList>
+        <div><TweetList tweets={tweets}></TweetList></div>
         </>
     );
 }
