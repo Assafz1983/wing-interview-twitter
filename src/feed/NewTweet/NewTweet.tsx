@@ -59,7 +59,7 @@ const NewTweet: React.FC<NewTweetProps> = ({ currentUsername, characterLimit, ad
                 value={text}
                 onChange={handleTextareaChange}/>
             <FlexboxEnd>
-                <CharCount count={text.length}></CharCount>
+                <CharCount count={text.length} characterLimit={characterLimit}></CharCount>
                 <Separator></Separator>
                 <MemoizedtweetButton isValid={validateText(text)} buttonText="Tweet" onclick={addTweet}></MemoizedtweetButton>
             </FlexboxEnd>
